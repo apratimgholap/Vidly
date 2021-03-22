@@ -1,0 +1,11 @@
+﻿@model scratch.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Equals(null)) { 
+    <p>Customer does'nt exists. </p>
+}
+<h1>@Model.Name</h1>
+
