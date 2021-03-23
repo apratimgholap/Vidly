@@ -1,4 +1,4 @@
-# Course Name: Udemy - The Complete ASP.NET MVC 5 Course
+# [Course Name: Udemy - The Complete ASP.NET MVC 5 Course](https://www.udemy.com/course/the-complete-aspnet-mvc-5-course/)
 ## Project Name: Vidly
 ## Framework: ASP.NET using C#
 
