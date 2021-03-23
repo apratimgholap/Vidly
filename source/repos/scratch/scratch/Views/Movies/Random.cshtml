@@ -1,0 +1,35 @@
+﻿@*@model scratch.Models.Movie*@
+
+@*We only have one model property so how we access data from customer and movie we create view model specifically built to pass data and method to the view*@
+@model scratch.ViewModel.RandomViewModel
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    var className = Model.Customers.Count > 5 ? "popular" : null;
+}
+<h2 class="@className">@string.Concat("ID = ", Model.Movie.Id, "        ", "MovieName = ", Model.Movie.Name)</h2>
+
+@if (Model.Customers.Count == 0)
+{
+    <p> No one has rented this movie before. </p>
+}
+
+else
+{
+
+    <ul>
+
+        @foreach (var customer in @Model.Customers)
+        {
+            <li> <p>@customer.Name</p></li>
+        }
+
+
+    </ul>
+
+}
+
+
