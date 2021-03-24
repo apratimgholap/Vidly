@@ -1,5 +1,4 @@
-﻿@model scratch.ViewModel.MovieViewModel
-
+﻿@model IEnumerable<@scratch.Models.Movie>
 @{
     ViewBag.Title = "ListMoviesView";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -13,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var movie in Model.movieList)
+        @foreach (var movie in Model)
         {
             <tr>
                 <th scope="row">@movie.Name</th>

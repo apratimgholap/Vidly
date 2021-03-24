@@ -13,27 +13,13 @@ namespace scratch.Controllers
         // GET: Movies
 
         
-        List<Movie> movies = new List<Movie>
-        {
-            new Movie {
-            Id = 1,
-            Name = "Shrek"
-            },
-
-            new Movie{
-            Id = 2,
-            Name = "Wall-E"
-             }
-        };
+        
 
         [Route("movies")]
         public ActionResult ListMovies()
         {
-            MovieViewModel movieViewModel = new MovieViewModel
-            {
-                movieList = movies
-            };
-            return View(movieViewModel);   
+            var movie = GetMovie();
+            return View(movie);   
         }
 
 
@@ -56,6 +42,7 @@ namespace scratch.Controllers
                 Customers = customer,
                 Movie = movie
             };
+            
             return View(viewModel);
             //var viewResult = new ViewResult();
             //viewResult.ViewData.Model = movie;
@@ -82,6 +69,21 @@ namespace scratch.Controllers
             return Content(string.Format("pageIndex={0}&sortBy={1}",pageIndex,sortBy));
         }
 
+        private IEnumerable<Movie> GetMovie()
+        {
+            return new List<Movie>
+            {
+                new Movie {
+                    Id = 1,
+                    Name = "Shrek"
+                },
+
+                new Movie{
+                    Id = 2,
+                    Name = "Wall-E"
+                 }
+            };
+        }
        
     }
 }

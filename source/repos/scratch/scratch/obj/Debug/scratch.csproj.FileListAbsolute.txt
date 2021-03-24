@@ -77,3 +77,11 @@ C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.csproj.CoreCompile
 C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.csproj.CopyComplete
 C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.dll
 C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.pdb
+C:\Users\aprat\source\repos\scratch\scratch\bin\EntityFramework.dll
+C:\Users\aprat\source\repos\scratch\scratch\bin\EntityFramework.SqlServer.dll
+C:\Users\aprat\source\repos\scratch\scratch\bin\EntityFramework.xml
+C:\Users\aprat\source\repos\scratch\scratch\bin\EntityFramework.SqlServer.xml
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.InitialModel.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.csproj.GenerateResource.cache
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.PopulateMembershipTypes.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.ApplyAnnotationsToCustomerNames.resources
