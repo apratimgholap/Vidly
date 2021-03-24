@@ -15,8 +15,8 @@ namespace scratch.Models
 
         public bool IsSubscribedToNewsLetter { get; set; }
         public MembershipType MembershipType  { get; set; } //navigation property
-
         public byte MembershipTypeId { get; set; } //foreign key
+        public string Birthdate { get; set; }
     }
 
    

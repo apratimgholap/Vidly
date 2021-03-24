@@ -85,3 +85,10 @@ C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.Initial
 C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.csproj.GenerateResource.cache
 C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.PopulateMembershipTypes.resources
 C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.ApplyAnnotationsToCustomerNames.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.Added_Name_To_MembershipType_And_In_Sql.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.populate_NameField_For_MembershipType.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.AddedDateAttributeToCustomer.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.Added_Genre_Field_To_Movie.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.Added_Genre_Field_To_Movie1.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.addedAttributesToMovieModel.resources
+C:\Users\aprat\source\repos\scratch\scratch\obj\Debug\scratch.Migrations.PopulateGenre.resources

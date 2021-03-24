@@ -11,7 +11,7 @@ namespace scratch.Models
         public short SignUpFee { get; set; }
         public int DurationInMonths { get; set; }
         public byte DiscountRate { get; set; }
-
+        public string Name { get; set; }
 
     }
 }

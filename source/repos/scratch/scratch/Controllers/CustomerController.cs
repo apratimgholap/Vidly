@@ -48,7 +48,7 @@ namespace scratch.Controllers
         public ActionResult Details(int id)
         {
 
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id); //this return the customer object with matching id !
+            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id); //this return the customer object with matching id !
             //int ID = int.Parse(id)-1;
             //Customer cust = new Customer();
             //cust = customer[ID];
