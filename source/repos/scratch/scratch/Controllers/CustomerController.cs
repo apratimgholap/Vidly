@@ -4,38 +4,39 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using scratch.Models;
-using scratch.ViewModel;
+using System.Data.Entity.Migrations;
+using System.Data.Entity;
 
 namespace scratch.Controllers
 {
     public class CustomerController : Controller
     {
-        // GET: Customer
+        //we should have named CustoemrDBContext as ApplicationDBContext
 
-        List<Customer> customer = new List<Customer> {
-                new Customer{  Name = "Apratim", Id = 1},
-                new Customer{  Name = "Raj", Id = 2}
-            };
+        private CustomerDBContext _context;
 
-        [Route("Customers")]
-        public ActionResult Customer()
+        public CustomerController()
         {
-            CustomerViewModel viewModel = new CustomerViewModel
-            {
-                Customer = customer
-            };
+            _context = new CustomerDBContext();
+        }
 
-            return View(viewModel);
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        public ActionResult Index()
+        {
+            var customer = _context.Customers; // deferred until we iterate
+            return View(customer.Include(c => c.MembershipType).ToList()); ;
         }
 
         [Route("Customers/Details/{id}")]
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
-            int ID = int.Parse(id)-1;
 
-            Customer cust = new Customer();
-            cust = customer[ID];
-            return View(cust);
+            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id); //this return the customer object with
+            return View(customer);
         }
     }
 }

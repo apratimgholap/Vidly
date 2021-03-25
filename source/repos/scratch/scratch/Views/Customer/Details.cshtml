@@ -1,11 +1,28 @@
 ﻿@model scratch.Models.Customer
+
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model.Equals(null)) { 
+@if (Model.Equals(null))
+{
     <p>Customer does'nt exists. </p>
 }
+
 <h1>@Model.Name</h1>
 
+<ul>
+    <li>
+        Membership Type : @Model.MembershipType.Name
+    </li>
+</ul>
+
+@if (Model.Birthdate != null)
+{
+    <ul>
+        <li>
+            @Model.Birthdate
+        </li>
+    </ul>
+}

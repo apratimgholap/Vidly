@@ -1,0 +1,38 @@
+﻿@*@model scratch.ViewModel.CustomerViewModel*@
+@*@model scratch.Models.CustomerDBContext*@
+@model List<scratch.Models.Customer>
+@{ ViewBag.Title = "Customer";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h1>Customers</h1>
+
+@if (Model.ToList().Count == 0)
+{
+    <p>There are no customers yet ! </p>
+}
+
+else
+{
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Customer</th>
+                <th>Discount Rate</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var cust in @Model.ToList())
+            {
+                <tr>
+                    <th scope="row">
+                        @Html.ActionLink(@cust.Name, "Details", "Customers", new { id = cust.Id }, null)
+                    </th>
+                    <td>@cust.MembershipType.Name</td> 
+                    @*here we need to load both customer and membershiptype at same time to access discount rate*@
+                </tr>
+            }
+        </tbody>
+    </table>
+}
