@@ -9,6 +9,6 @@ namespace scratch.Models
     {
         public byte Id { get; set; }
         public string Type { get; set; }
-        
+
     }
 }
