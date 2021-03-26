@@ -1,0 +1,32 @@
+﻿@model IEnumerable<scratch.Models.Movie>
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<h2>Movies</h2>
+@Html.ActionLink("New Movie","MovieForm","Movies",new {@class = "btn btn-primary btn-lg",role = "button", style = "margin: 10px" })
+
+<div>
+    <table class="table table-bordered table-hover">
+
+        <thead>
+            <tr>
+                <th>Movie Name</th>
+                <th>Genre</th>
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+            @foreach (var movie in @Model)
+            {
+    <tr>
+        <td>@Html.ActionLink(@movie.Name, "EditForm", "Movies", new { id = movie.Id }, null) </td>
+        <td>@movie.GenreType.Type</td>
+    </tr>
+    }
+        </tbody>
+
+
+    </table>
+</div>

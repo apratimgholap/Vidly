@@ -1,0 +1,16 @@
+﻿@model  scratch.Models.Movie
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+
+<ul>
+    <li><strong>Genre</strong>: @Model.GenreType.Type</li>
+    <li><strong>Release Date</strong>: @Model.ReleaseDate.ToString("dddd, dd MMMM yyyy")</li>
+    <li><strong>Date Added</strong>: @Model.DateAdded.ToString("dddd, dd MMMM yyyy")</li>
+    <li><strong>Number in Stocks</strong>: @Model.NoOfStockAvailable</li>
+</ul>
+

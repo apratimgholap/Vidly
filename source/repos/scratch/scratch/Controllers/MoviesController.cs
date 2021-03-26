@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,56 +12,108 @@ namespace scratch.Controllers
 {
     public class MoviesController : Controller
     {
-        // GET: Movies
+        private CustomerDBContext _context;
 
-        
-
-
-        [Route("movies/random")]
-        public ActionResult Random()
+        public MoviesController()
         {
-            Movie movie = new Movie()
-            {
-                Name = "Shawshank",
-                Id = 1
-            };
+            _context = new CustomerDBContext();
+        }
 
-            List<Customer> customer = new List<Customer> {
-                new Customer{  Name = "Apratim", Id = 1},
-                new Customer{  Name = "Raj", Id = 2}
-            };
+        protected override void Dispose(bool disposing) // Understand Dispose.
+        {
+            _context.Dispose();
+        }
 
-            RandomViewModel viewModel = new RandomViewModel()
+        public ActionResult MovieForm()
+        {
+            var genres = _context.Genres.ToList(); //here genere is not collection how we are iterating over the list ?
+
+            var viewModel = new MovieFormViewModel
             {
-                Customers = customer,
-                Movie = movie
+                Genre = genres
             };
             return View(viewModel);
-            //var viewResult = new ViewResult();
-            //viewResult.ViewData.Model = movie;
-
-            //return Content("Hello World");
-            //return HttpNotFound();
-            //return new EmptyResult();
-            //return RedirectToAction("Index","Home",new {page=1,SortBy=name});
-
-        }
-
-        [Route("movies/released/{year}/{month:regex(\\d{4}):range(1,12)}")]
-        public ActionResult ByReleaseDate(int year,int month)
-        {
-            return Content("Month = " + month + " " + "Year ="+year);
         }
         
-        public ActionResult Edit(int i)
-        { 
-            return Content(string.Format("The passed number is = {0}", i));
-        }
-        public ActionResult Index(int? pageIndex=1,string sortBy="Name")
+        public ActionResult EditForm(int id)
         {
-            return Content(string.Format("pageIndex={0}&sortBy={1}",pageIndex,sortBy));
+            Movie movie = _context.Movies.SingleOrDefault(m => m.Id == id);
+            var genres = _context.Genres.ToList();
+
+            if (movie == null)
+                return HttpNotFound(); 
+
+            var viewModel = new MovieFormViewModel
+            {
+                Movie = movie,
+                Genre = genres
+            };
+            return View("MovieForm",viewModel);
         }
 
        
+        public ActionResult Save(Movie movie)
+        {
+            if (movie.Id == 0)
+                _context.Movies.Add(movie);
+            else
+            {
+
+                var movieInContextDb = _context.Movies.Single(m => m.Id == movie.Id);
+
+                movieInContextDb.Name = movie.Name;
+                movieInContextDb.NoOfStockAvailable = movie.NoOfStockAvailable;
+                movieInContextDb.ReleaseDate = movie.ReleaseDate;
+                movieInContextDb.GenreType = movie.GenreType;
+            }
+
+            try
+
+            {
+                _context.SaveChanges();
+            }
+
+            catch (DbEntityValidationException e) //deep dive exceptions
+            {
+
+                Console.WriteLine(e);
+            }
+            return RedirectToAction("Index","Movies");
+        }
+        public ActionResult Index()
+        {
+            var movie = _context.Movies;
+            return View(movie.Include(m => m.GenreType));
+        }
+
+        [Route("Movies/Details/{id}")]
+        public ActionResult Details(int id)
+        {
+            var movie = _context.Movies;
+            return View(movie.Include(t => t.GenreType).FirstOrDefault(t => t.GenreId == id)); 
+            // Single worked in case of 'Customer' because only single customer was selected at end
+            // But in case of 'Movie' because multiple movie will be selected as multiple movies can have same genres 
+        }
+
+
+        //Some Previous Code 
+
+        //var viewResult = new ViewResult();
+        //viewResult.ViewData.Model = movie;
+
+        //return Content("Hello World");
+        //return HttpNotFound();
+        //return new EmptyResult();
+        //return RedirectToAction("Index","Home",new {page=1,SortBy=name});
+
+
+        //[Route("movies/released/{year}/{month:regex(\\d{4}):range(1,12)}")]
+        //public ActionResult ByReleaseDate(int year,int month)
+        //{
+        //    return Content("Month = " + month + " " + "Year ="+year);
+        //}
+
+
+
     }
 }
