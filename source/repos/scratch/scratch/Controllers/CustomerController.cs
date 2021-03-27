@@ -15,7 +15,15 @@ namespace scratch.Controllers
         //we should have named CustoemrDBContext as ApplicationDBContext
         private CustomerDBContext _context;
 
-        
+
+        // Understand Dispose.
+       
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+
         public CustomerController()
         {
             _context = new CustomerDBContext();
@@ -23,7 +31,9 @@ namespace scratch.Controllers
 
         public ActionResult CustomerForm()
         {
-            var membershipTypes = _context.MembershipTypes.ToList();
+            var membershipTypes = _context.MembershipTypes.ToList();  //here genere/membershipType is not collection how we are iterating over the list ? // We were thinking it in wrong way here we are not accessing MembershipTypes Class we are accessing the database see _context :}
+                     // So We need to convert the values of DB membershiptype which are different membershipType object into list :)
+                     // then we are passing those values to viewModel which has a enumerable to just iterate through these values.
 
             var viewModel = new CustomerFormViewModel
             {
@@ -47,7 +57,7 @@ namespace scratch.Controllers
         }
 
         [HttpPost] //if actions are modifying data they should never get access by httpget method
-        public ActionResult Save(Customer customer) //request data mapped to object - model binding
+        public ActionResult Save(Customer customer) //request data(the data we filled) mapped to model here its customer - model binding
         {
             //if (!ModelState.IsValid)
             //{
@@ -58,8 +68,8 @@ namespace scratch.Controllers
             //    return View("viewModel");
             //}
 
-            if (customer.Id==0)
-                _context.Customers.Add(customer);
+            if (customer.Id==0) 
+                _context.Customers.Add(customer);  //here we just store the data in memory not database. context change tracking mechanism idetifies modification and runs the corresponidng sql queries on database
             else
             {
                 var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
@@ -73,11 +83,7 @@ namespace scratch.Controllers
             return RedirectToAction("Index","Customer");
         }
        
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-        }
-        
+      
         public ActionResult Index()
         {
             var customer = _context.Customers; // deferred until we iterate

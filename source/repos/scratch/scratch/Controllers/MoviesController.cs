@@ -19,14 +19,14 @@ namespace scratch.Controllers
             _context = new CustomerDBContext();
         }
 
-        protected override void Dispose(bool disposing) // Understand Dispose.
+        protected override void Dispose(bool disposing) 
         {
             _context.Dispose();
         }
 
         public ActionResult MovieForm()
         {
-            var genres = _context.Genres.ToList(); //here genere is not collection how we are iterating over the list ?
+            var genres = _context.Genres.ToList();
 
             var viewModel = new MovieFormViewModel
             {
@@ -34,7 +34,8 @@ namespace scratch.Controllers
             };
             return View(viewModel);
         }
-        
+
+        [HttpPost]
         public ActionResult EditForm(int id)
         {
             Movie movie = _context.Movies.SingleOrDefault(m => m.Id == id);
